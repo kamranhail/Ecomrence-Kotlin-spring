@@ -2,11 +2,10 @@ package com.ecomrance.Ecom.Kotlin.spring.Controlar
 
 import com.ecomrance.Ecom.Kotlin.spring.modal.Catagory
 import com.ecomrance.Ecom.Kotlin.spring.service.CatagoryService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
-import org.yaml.snakeyaml.events.Event.ID
 
 @RestController
 @RequestMapping("/api/k")
@@ -21,7 +20,7 @@ class CatagoryContraller (private val catagoryService: CatagoryService) {
 
     @PostMapping("/public/catagories")
     //@RequestMapping(value = "/api/k/public/catagories", method = RequestMethod.POST)
-    fun createCatagory(@RequestBody catagory: Catagory): ResponseEntity<String> {
+    fun createCatagory(@Valid@RequestBody catagory: Catagory): ResponseEntity<String> {
         catagoryService.createCatagory(catagory)
         return ResponseEntity.status(HttpStatus.CREATED)
             .body("Category added successfuly")
@@ -50,7 +49,7 @@ class CatagoryContraller (private val catagoryService: CatagoryService) {
                        @RequestBody catagory: Catagory): ResponseEntity<String> {
         // Attempt to delete the category
         // 1. Set the ID onto the received Catagory object
-        catagory.catagory_id = idd
+        catagory.catagoryId = idd
 
         // 2. Call the service layer. The service will handle the existence check internally.
         catagoryService.updateCatagory(idd, catagory)
@@ -63,3 +62,11 @@ class CatagoryContraller (private val catagoryService: CatagoryService) {
 
 }
 }
+
+//..In Spring Boot, ResponseEntity is a powerful tool that represents the entire HTTP response. Think of it as a "box" where you can pack three things to send back to the user:
+
+//The Body: The actual data (JSON, String, etc.).
+
+//The Status Code: (e.g., 200 OK, 404 Not Found, 400 Bad Request).
+
+//The Headers: Metadata (e.g., Content-Type, custom security tokens).
