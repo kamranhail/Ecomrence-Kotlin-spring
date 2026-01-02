@@ -1,6 +1,8 @@
 package com.ecomrance.Ecom.Kotlin.spring.Controlar
 
-import com.ecomrance.Ecom.Kotlin.spring.modal.Catagory
+import com.ecomrance.Ecom.Kotlin.spring.configuration.AppConstants
+import com.ecomrance.Ecom.Kotlin.spring.payload.CatagoryDTO
+import com.ecomrance.Ecom.Kotlin.spring.payload.CatagotyResponse
 import com.ecomrance.Ecom.Kotlin.spring.service.CatagoryService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -13,19 +15,49 @@ class CatagoryContraller (private val catagoryService: CatagoryService) {
 
 
     @GetMapping("/public/catagories")
-    fun getAllCatagories(): List<Catagory> {
-        return catagoryService.getAllcatagories()
+    fun getAllCatagories(
+        @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER) pageNumber: Int,
+        @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE) pageSize: Int
+    ): CatagotyResponse {
+        return catagoryService.getAllcatagories(pageNumber,pageSize)
     }
 
 
-    @PostMapping("/public/catagories")
+    @PostMapping("/public/catagoryadd")
     //@RequestMapping(value = "/api/k/public/catagories", method = RequestMethod.POST)
-    fun createCatagory(@Valid@RequestBody catagory: Catagory): ResponseEntity<String> {
-        catagoryService.createCatagory(catagory)
-        return ResponseEntity.status(HttpStatus.CREATED)
-            .body("Category added successfuly")
+    fun createCatagory(@Valid@RequestBody catagorydto: CatagoryDTO): ResponseEntity<CatagoryDTO> {
+
+
+
+
+
+
+
+        catagoryService.createCatagory(catagorydto)
+        return ResponseEntity(catagorydto,HttpStatus.CREATED)
+
     }
 
+
+    @PostMapping("/echo")
+    fun echoTest(@RequestParam(name = "messege", defaultValue = "helloworld defaul",)
+
+                 messege :String) : ResponseEntity<String>{
+
+        return ResponseEntity("echo Messeged $messege",HttpStatus.OK)
+
+
+    }
+    @PostMapping("/echotest")
+    fun echoTest(
+        @RequestParam(name = "message", defaultValue = "hello world") message: String,
+        @RequestParam(name = "code", defaultValue = "0") code: Int,
+        @RequestParam(name = "user", required = false) user: String?
+    ): ResponseEntity<String> {
+
+        val response = "User: $user | Message: $message | Code: $code"
+        return ResponseEntity(response, HttpStatus.OK)
+    }
     @DeleteMapping("/public/catagories/{idd}")
     fun deleteCatagory(@PathVariable idd: Long): ResponseEntity<String> {
         // Attempt to delete the category
@@ -46,13 +78,13 @@ class CatagoryContraller (private val catagoryService: CatagoryService) {
 
     @PutMapping("/public/catagories/{idd}")
     fun updateCatagory(@PathVariable idd: Long,
-                       @RequestBody catagory: Catagory): ResponseEntity<String> {
+                       @RequestBody catagorydto: CatagoryDTO): ResponseEntity<String> {
         // Attempt to delete the category
         // 1. Set the ID onto the received Catagory object
-        catagory.catagoryId = idd
+        catagorydto.catagoryId = idd
 
         // 2. Call the service layer. The service will handle the existence check internally.
-        catagoryService.updateCatagory(idd, catagory)
+        catagoryService.updateCatagory(idd, catagorydto)
 
         // 3. Always return 200 OK.
         // NOTE: This is incorrect REST practice if the ID doesn't exist, as it should be 404.

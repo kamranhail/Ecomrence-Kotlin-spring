@@ -1,0 +1,12 @@
+INSERT INTO CATAGORIES  (catagory_name) VALUES
+('Electronics'), ('Fashion'), ('Home'), ('Garden'), ('Books'),
+('Music'), ('Movies'), ('Games'), ('Toys'), ('Beauty'),
+('Health'), ('Automotive'), ('Tools'), ('Industrial'), ('Grocery'),('Music'), ('Movies'), ('Games'), ('Toys'), ('Beauty'),
+('Health'), ('Automotive'), ('Tools'), ('Industrial'), ('Grocery'),('Music'), ('Movies'), ('Games'), ('Toys'), ('Beauty'),
+('Health'), ('Automotive'), ('Tools'), ('Industrial'), ('Grocery'),('Music'), ('Movies'), ('Games'), ('Toys'), ('Beauty'),
+('Health'), ('Automotive'), ('Tools'), ('Industrial'), ('Grocery'),('Music'), ('Movies'), ('Games'), ('Toys'), ('Beauty'),
+('Health'), ('Automotive'), ('Tools'), ('Industrial'), ('Grocery'),
+('Baby'), ('Pet Supplies'), ('Sports'), ('Outdoors'), ('Handmade');
+
+
+
