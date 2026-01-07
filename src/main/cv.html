@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Kamran Yousaf - Android & Backend CV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --gradient-1: linear-gradient(135deg, #7c3aed, #06b6d4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            background: var(--background);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-layout {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-bar {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 6px 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .app-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            padding: 12px 12px 8px 12px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto auto auto;
+            gap: 10px;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-section {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Profile Section */
+        .profile-section {
+            grid-column: 1 / 3;
+            grid-row: 1 / 2;
+            text-align: center;
+            padding: 15px !important;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .avatar i { font-size: 28px; color: white; }
+        .name { font-size: 24px; font-weight: 700; margin-bottom: 3px; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .title { font-size: 15px; color: var(--text-secondary); margin-bottom: 10px; font-weight: 500; }
+
+        .tags { display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
+        .tag { background: rgba(6, 182, 212, 0.2); color: #06b6d4; padding: 4px 10px; border-radius: 14px; font-size: 10px; border: 1px solid rgba(6, 182, 212, 0.4); font-weight: 500; }
+
+        .stats-section { grid-column: 1 / 3; grid-row: 2 / 3; display: flex; justify-content: space-around; align-items: center; padding: 8px 12px !important; height: 60px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 16px; font-weight: 700; color: var(--secondary); margin-bottom: 2px; }
+        .stat-label { font-size: 10px; color: var(--text-secondary); }
+
+        .section-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; color: var(--text-primary); }
+        .section-title i { font-size: 12px; color: var(--secondary); }
+
+        /* Skills Bars */
+        .skill-item { margin-bottom: 10px; }
+        .skill-info { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
+        .skill-name { color: var(--text-primary); font-weight: 500; }
+        .skill-percent { color: var(--secondary); font-weight: 600; }
+        .skill-bar { height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; overflow: hidden; }
+        .skill-level { height: 100%; border-radius: 2px; background: var(--gradient-1); transition: width 1s ease-in-out; }
+
+        /* Tech Stack Chips */
+        .tech-category h4 { font-size: 11px; color: var(--secondary); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .tech-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+        .tech-chip { background: rgba(124, 58, 237, 0.15); color: var(--text-primary); padding: 3px 8px; border-radius: 8px; font-size: 9px; border: 1px solid rgba(124, 58, 237, 0.3); }
+
+        /* Experience List */
+        .exp-item { margin-bottom: 15px; }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+        .exp-title { font-size: 12px; font-weight: 700; color: var(--text-primary); }
+        .exp-date { font-size: 9px; color: var(--secondary); font-weight: 500; }
+        .exp-company { font-size: 11px; color: var(--text-secondary); margin-bottom: 5px; font-style: italic; }
+        .exp-desc ul { padding-left: 12px; margin: 0; }
+        .exp-desc li { font-size: 9.5px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 3px; }
+
+        /* Education & Contact */
+        .edu-item { margin-bottom: 8px; }
+        .edu-title { font-size: 11px; font-weight: 600; color: var(--text-primary); }
+        .edu-info { font-size: 9px; color: var(--text-secondary); }
+
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .contact-item { display: flex; align-items: center; gap: 8px; padding: 6px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; }
+        .contact-icon { width: 22px; height: 22px; background: var(--gradient-1); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .contact-icon i { font-size: 10px; color: white; }
+        .contact-text { font-size: 9px; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        .nav-bar { background: rgba(30, 41, 59, 0.95); padding: 8px 0; display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-secondary); font-size: 9px; }
+        .nav-item.active { color: var(--secondary); }
+        .nav-item i { font-size: 16px; margin-bottom: 2px; }
+
+        .download-btn { position: fixed; top: 20px; right: 20px; background: var(--gradient-1); color: white; border: none; border-radius: 50px; padding: 10px 20px; font-weight: 600; z-index: 100; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+
+        @media print {
+            .download-btn { display: none; }
+            body { padding: 0; background: white; }
+            .a4-page { box-shadow: none; width: 210mm; height: 297mm; }
+        }
+    </style>
+</head>
+<body>
+<button class="download-btn" onclick="window.print()">
+    <i class="fas fa-file-pdf me-2"></i> Export PDF
+</button>
+
+<div class="a4-page">
+    <div class="mobile-layout">
+        <div class="status-bar">
+            <span>9:41 AM</span>
+            <span>
+                    <i class="fas fa-signal me-1"></i>
+                    <i class="fas fa-wifi me-1"></i>
+                    <i class="fas fa-battery-full"></i>
+                </span>
+        </div>
+
+        <div class="app-container">
+            <div class="content-grid">
+                <div class="grid-section profile-section">
+                    <div class="avatar"><i class="fas fa-code"></i></div>
+                    <h1 class="name">Muhammad Kamran Yousaf</h1>
+                    <p class="title">Android & Backend Developer</p>
+                    <div class="tags">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">JPA/Hibernate</span>
+                        <span class="tag">Jetpack Compose</span>
+                        <span class="tag">REST API</span>
+                    </div>
+                </div>
+
+                <div class="grid-section stats-section">
+                    <div class="stat"><div class="stat-value">3+</div><div class="stat-label">Years Exp</div></div>
+                    <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Projects</div></div>
+                    <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Commitment</div></div>
+                </div>
+
+                <div class="grid-section" style="grid-column: 1/2; grid-row: 3/5;">
+                    <div class="section-title"><i class="fas fa-layer-group"></i><span>Technical Expertise</span></div>
+
+                    <div class="skill-item">
+                        <div class="skill-info"><span class="skill-name">Kotlin / Java</span><span class="skill-percent">95%</span></div>
+                        <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span class="skill-name">Spring Boot & JPA</span><span class="skill-percent">88%</span></div>
+                        <div class="skill-bar"><div class="skill-level" style="width: 88%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span class="skill-name">Android (Compose/XML)</span><span class="skill-percent">92%</span></div>
+                        <div class="skill-bar"><div class="skill-level" style="width: 92%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span class="skill-name">SQL / NoSQL</span><span class="skill-percent">85%</span></div>
+                        <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                    </div>
+
+                    <div class="tech-stack mt-3">
+                        <div class="tech-category">
+                            <h4>Backend Architecture</h4>
+                            <div class="tech-chips">
+                                <span class="tech-chip">DTO Pattern</span>
+                                <span class="tech-chip">ControllerAdvice</span>
+                                <span class="tech-chip">Bean Validation</span>
+                                <span class="tech-chip">Swagger/OpenAPI</span>
+                                <span class="tech-chip">Spring Security</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Mobile & Tools</h4>
+                            <div class="tech-chips">
+                                <span class="tech-chip">MVVM</span>
+                                <span class="tech-chip">Dagger-Hilt</span>
+                                <span class="tech-chip">Retrofit</span>
+                                <span class="tech-chip">Git / Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-section" style="grid-column: 2/3; grid-row: 3/5;">
+                    <div class="section-title"><i class="fas fa-briefcase"></i><span>Key Experience</span></div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-title">Freelance Backend & Mobile Dev</span>
+                            <span class="exp-date">2023 - Present</span>
+                        </div>
+                        <div class="exp-company">E-commerce API Project</div>
+                        <div class="exp-desc">
+                            <ul>
+                                <li>Built a robust **Spring Boot 3.x** API for product management with **JPA/Hibernate**.</li>
+                                <li>Implemented **DTO Pattern** and **Global Exception Handling** for secure, clean data flow.</li>
+                                <li>Integrated **JSR-303 Bean Validation** and **Pagination** for scalable performance.</li>
+                                <li>Developed a **Spring Boot** REST API using **MongoDB** to handle high-concurrency category fetching.</li>
+                                <li>Built an Android client in **Jetpack Compose** utilizing **StateFlow** for reactive UI updates from the backend.</li>
+                                <li>Implemented the **DTO pattern** for efficient data transfer between the server and mobile device</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-title">Android Application Developer</span>
+                            <span class="exp-date">2021 - 2022</span>
+                        </div>
+                        <div class="exp-company">Native App Solutions</div>
+                        <div class="exp-desc">
+                            <ul>
+                                <li>Developed feature-rich apps using **Jetpack Compose** and **Kotlin Coroutines**.</li>
+                                <li>Architected a **Multi-Module** system to separate features, improving team productivity and build times by 30%.</li>
+                                <li>Designed **Responsive Layouts** using WindowSizeClasses to support phones, tablets, and foldables.</li>
+                                <li>Integrated **Retrofit** and **Room** for an "Offline-First" experience with data persistence.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-section" style="grid-column: 1/2; grid-row: 5/6;">
+                    <div class="section-title"><i class="fas fa-graduation-cap"></i><span>Education</span></div>
+                    <div class="edu-item">
+                        <div class="edu-title">M.Sc. IT Project Management</div>
+                        <div class="edu-info">Berlin School of Business & Innovation | 2024</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-title">B.Sc. Computer Science</div>
+                        <div class="edu-info">University of Gujrat | 2016</div>
+                    </div>
+                </div>
+
+                <div class="grid-section" style="grid-column: 2/3; grid-row: 5/6;">
+                    <div class="section-title"><i class="fas fa-paper-plane"></i><span>Connect</span></div>
+                    <div class="contact-grid">
+                        <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-text">+49 1575 2447302</div></div>
+                        <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-text">kamranhail@gmail.com</div></div>
+                        <div class="contact-item"><div class="contact-icon"><i class="fab fa-github"></i></div><div class="contact-text">github.com/kamranhail</div></div>
+                        <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-text">Berlin, Germany</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-item active"><i class="fas fa-user-circle"></i><span>CV</span></div>
+            <div class="nav-item"><i class="fas fa-project-diagram"></i><span>Portfolio</span></div>
+            <div class="nav-item"><i class="fas fa-code-branch"></i><span>Git</span></div>
+            <div class="nav-item"><i class="fas fa-id-card"></i><span>Contact</span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Interactive bar animation
+    window.onload = () => {
+        const levels = document.querySelectorAll('.skill-level');
+        levels.forEach(l => {
+            const target = l.style.width;
+            l.style.width = '0%';
+            setTimeout(() => { l.style.width = target; }, 200);
+        });
+    }
+</script>
+</body>
+</html>
